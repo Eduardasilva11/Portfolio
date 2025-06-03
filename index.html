@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Duda</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<style>
+      /* Container do cartão */
+.projeto-cartao {
+    background: white;
+    border-radius: 0.5rem; /* 8px */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 1rem auto;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Cabeçalho com gradiente */
+.projeto-header {
+    height: 12rem; /* 48 x 4px */
+    background: linear-gradient(to right, #34d399, #14b8a6); /* from-green-400 to-teal-500 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ícone grande branco */
+.icone-projeto {
+    color: white;
+    font-size: 6rem; /* text-6xl */
+}
+
+/* Conteúdo interno */
+.projeto-conteudo {
+    padding: 1.5rem; /* 6 x 4px */
+}
+
+/* Título */
+.projeto-conteudo h3 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600;
+    color: #1f2937; /* gray-800 */
+    margin-bottom: 0.5rem;
+}
+
+/* Parágrafo */
+.projeto-conteudo p {
+    color: #4b5563; /* gray-600 */
+    margin-bottom: 1rem;
+}
+
+/* Tags container */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* 2 */
+    margin-bottom: 1rem;
+}
+
+/* Tags individuais */
+.tag {
+    font-size: 0.75rem; /* text-xs */
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    border-radius: 9999px; /* fully rounded */
+    font-weight: 500;
+}
+
+/* Cores das tags */
+.vue {
+    background-color: #d1fae5; /* green-100 */
+    color: #065f46; /* green-800 */
+}
+
+.d3 {
+    background-color: #ccfbf1; /* teal-100 */
+    color: #134e4a; /* teal-800 */
+}
+
+.python {
+    background-color: #dbeafe; /* blue-100 */
+    color: #1ea5af; /* blue-800 */
+}
+
+/* Link botão */
+.botao-link {
+    color: #3b82f6; /* blue-500 */
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.botao-link:hover {
+    color: #1e40af; /* blue-700 */
+}
+
+/* Container "ver todos" */
+.ver-todos-container {
+    text-align: center;
+    margin-top: 3rem;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Botão "ver todos" */
+.botao-contato {
+    display: inline-block;
+    background-color: #1f2937; /* gray-800 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.botao-contato:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+/* Animação fadeIn */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Barra de navegação -->
+    <nav class="fixed w-full bg-white shadow-sm z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-blue-500">Portfólio</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="nav-link text-gray-700 hover:text-blue-500">Início</a>
+                    <a href="#projets" class="nav-link text-gray-700 hover:text-blue-500">Projetos</a>
+                    <a href="#competences" class="nav-link text-gray-700 hover:text-blue-500">Competências</a>
+                    <a href="#a-propos" class="nav-link text-gray-700 hover:text-blue-500">Sobre</a>
+                    <a href="#contato" class="contact-btn bg-blue-500 text-white px-4 py-2 rounded-md">Contato</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menu móvel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#accueil" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Início</a>
+                <a href="#projets" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Projetos</a>
+                <a href="#competences" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Competências</a>
+                <a href="#a-propos" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">Sobre</a>
+                <a href="#contato" class="block px-3 py-2 bg-blue-500 text-white rounded-md">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Herói -->
+    <section id="accueil" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Olá, sou eu <span class="text-blue-500">Eduarda</span></h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold text-gray-600 mb-6">Desenvolvedora Web Site</h2>
+                    <p class="text-gray-600 mb-8 text-lg">Eu crio sites com algumas linguagens de programação.</p>
+                    <div class="flex space-x-4">
+                        <a href="#projets" class="contact-btn bg-blue-500 text-white px-6 py-3 rounded-md">Veja meus projetos</a>
+                        <a href="#contato" class="contact-btn border border-blue-500 text-blue-500 px-6 py-3 rounded-md">Me contatar</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center animate-fadeIn" style="animation-delay: 0.3s;">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-blue-500 rounded-full opacity-10 absolute -top-6 -left-6"></div>
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-indigo-500 rounded-full opacity-10 absolute -bottom-6 -right-6"></div>
+                        <img src="IMG-20250212-WA0006.jpg"
+                             alt="Foto de perfil"
+                             class="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-white shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos de Seção -->
+    <section id="projets" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Meus projetos recentes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Descubra uma seleção de realizações marcantes, onde design e funcionalidade se unem.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projeto 1 -->
+                <div class="projet-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.1s;">
+                    <div class="h-48 bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Site Clima</h3>
+                        <p class="text-gray-600 mb-4">Site para verificar se está chovendo, ensolarado ou nublado, mostrando quantos graus está, em tempo real. Ele mostra em todas as cidades do mundo, basta pesquisar.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Html</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">Style Css</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Google Fonts</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Font Awesome</span>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">FlagsAPI + OpenWeatherMap</span>
+                        </div>
+                        <a href="https://eduardasilva11.github.io/climaduda/" class="text-blue-500 font-medium hover:text-blue-700">Ver o projeto →</a>
+                    </div>
+                </div>
+                
+                <!-- Projeto 2 -->
+                <div class="projet-card bg-white rounded-lg overflow-hidden shadow-md animate-fadeIn" style="animation-delay: 0.2s;">
+                    <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Site Temático Multi-Eventos</h3>
+                        <p class="text-gray-600 mb-4">Este site é uma plataforma interativa que celebra três momentos especiais da vida, cada um com uma seção exclusiva.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">React</span>
+                            <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">JavaScript XML</span>
+                            <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">Node.js + npm</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Canvas-confetti</span>
+                        </div>
+                        <a href="https://eduardasilva11.github.io/Formatura/" class="text-blue-500 font-medium hover:text-blue-700">Ver o projeto →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- Projeto 3 -->
+<div class="projeto-cartao">
+    <div class="projeto-header">
+        <i class="fas fa-chart-line icone-projeto"></i>
+    </div>
+    <div class="projeto-conteudo">
+        <h3>Site de Acidentes</h3>
+        <p>Visualização de dados em tempo real com filtros avançados e exportação de PDF.</p>
+        <div class="tags">
+            <span class="tag vue">React</span>
+            <span class="tag d3">Php</span>
+            <span class="tag d3">Tailwind CSS</span>
+            <span class="tag python">JavaScript</span>
+            <span class="tag python">Font Awesome</span>
+        </div>
+       <a href="https://eduarda.infinityfreeapp.com" class="botao-link" target="_blank" rel="noopener noreferrer">
+  Ver o projeto →
+</a>
+    </div>
+</div>
+
+<div class="ver-todos-container">
+    <a href="https://github.com/Eduardasilva11" class="botao-contato">
+        Veja todos os projetos <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+
+<!-- Seção Competências -->
+<section id="competências" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Minhas Competências</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Um conjunto diversificado de competências técnicas e criativas para responder a todos os seus números necessários.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Competência 1 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate-fadeIn" style="animation-delay: 0.1s;">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-code text-blue-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Desenvolvimento Web</h3>
+                <p class="text-gray-600 mb-4">Criação de sites responsivos e interativos utilizando tecnologias modernas da web, focando em interfaces intuitivas e com boa estética.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">HTML5</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">CSS3</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">React</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Font Awesome</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">Google Fonts</span>
+                </div>
+            </div>
+
+            <!-- Competência 2 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate-fadeIn" style="animation-delay: 0.2s;">
+                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-server text-indigo-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Integração de APIs e Efeitos Visuais</h3>
+                <p class="text-gray-600 mb-4">Implementação de APIs públicas e bibliotecas para enriquecer sites com dados dinâmicos e efeitos visuais.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Node.js</span>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">FlagsAPI</span>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">OpenWeatherMap</span>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">Canvas-confetti</span>
+                </div>
+            </div>
+
+            <!-- Competência 3 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate-fadeIn" style="animation-delay: 0.3s;">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-paint-brush text-purple-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Lógica de Programação e Backend Simples</h3>
+                <p class="text-gray-600 mb-4">Desenvolvimento de pequenas funcionalidades e scripts com lógica de programação, além de integração básica com linguagens backend.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">PHP</span>
+                    <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">C#</span>
+                    <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de competências -->
+        <div class="mt-16 bg-white p-8 rounded-lg shadow-sm animate-fadeIn" style="animation-delay: 0.4s;">
+            <h3 class="text-xl font-semibold text-gray-800 mb-6">Domínio das Tecnologias</h3>
+            <div class="space-y-6">
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-700">JavaScript</span>
+                        <span class="text-gray-500">90%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-700">React</span>
+                        <span class="text-gray-500">85%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-700">Node.js</span>
+                        <span class="text-gray-500">60%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%;"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-gray-700">Html</span>
+                        <span class="text-gray-500">95%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 95%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+                    <div>
+    <p><b></b></p>
+            <section id="a-propos" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">A meu respeito</h2>
+                <p class="text-gray-600 mb-6">Apaixonada pela tecnologia desde minha adolescência, estou transformando essa paixão em web sites.</p>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">Quase a 1 ano e 6 meses</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">Finalizando Curso Técnico no Senai</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-gray-700">Mais de 10 web sites desenvolvidos ao longo do curso</p>
+                        </div>
+                    </div>
+                </div>
+
+<!-- Fechando divs/pais que você pode verificar se correspondem no seu código -->
+</div>
+</div>
+</div>
+</div>
+
+<!-- Seção Contato -->
+<section id="contato" class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Entre em contato comigo</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Você tem um projeto em andamento ou deseja discutir uma oportunidade? Eu ficarei feliz em trocar ideias com você.</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8 animate-fadeIn">
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-6">Informações de contato</h3>
+
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <i class="fas fa-envelope text-blue-500"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-medium text-gray-500">E-mail</h4>
+                <p class="text-gray-700">edudaoliveira11@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <i class="fas fa-phone-alt text-blue-500"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-medium text-gray-500">Telefone</h4>
+                <p class="text-gray-700">(34) 9 8859-6669</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <i class="fas fa-map-marker-alt text-blue-500"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-medium text-gray-500">Instagram</h4>
+                <p class="text-gray-700">@dudazw9</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-6">Redes sociais</h3>
+            <div class="flex space-x-4">
+              <a href="https://www.linkedin.com/in/eduarda-silva-de-oliveira-447082309?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://github.com/Eduardasilva11" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300">
+                <i class="fab fa-dribbble"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- HTML DO FORMULÁRIO -->
+<div class="md:w-1/2 animate-fadeIn" style="animation-delay: 0.3s;">
+  <div class="bg-white p-8 rounded-lg shadow-sm">
+    <h3 class="text-xl font-semibold text-gray-800 mb-6">Envie-me uma mensagem</h3>
+    <form action="https://formspree.io/f/xqabkooq" method="POST">
+      <div class="mb-6">
+        <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome completo</label>
+        <input type="text" id="nome" name="nome" class="w-full px-4 py-3 border border-gray-300 rounded-md" placeholder="Seu nome" required />
+      </div>
+
+      <div class="mb-6">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Endereço de e-mail</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-md" placeholder="votre@email.com" required />
+      </div>
+
+      <div class="mb-6">
+        <label for="assunto" class="block text-sm font-medium text-gray-700 mb-2">Assunto</label>
+        <input type="text" id="assunto" name="assunto" class="w-full px-4 py-3 border border-gray-300 rounded-md" placeholder="Objeto da sua mensagem" required />
+      </div>
+
+      <div class="mb-6">
+        <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md" placeholder="Descreva seu projeto ou sua demanda" required></textarea>
+      </div>
+
+      <button type="submit" class="contact-button w-full bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-600">
+        Envie a mensagem
+      </button>
+    </form>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+   <!-- Rodapé -->
+<footer class="bg-gray-800 text-white py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <a href="#" class="text-xl font-bold">Portfólio</a>
+        <p class="text-gray-400 mt-2">© 2025 Portfólio. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="flex space-x-6">
+        <a href="https://www.linkedin.com/in/eduarda-silva-de-oliveira-447082309?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-gray-400 hover:text-white transition-colors duration-300">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/Eduardasilva11" class="text-gray-400 hover:text-white transition-colors duration-300">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+          <i class="fab fa-dribbble"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Menu móvel
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Animação com Intersection Observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.animate-fadeIn');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    animateElements.forEach(element => {
+      element.style.opacity = 0;
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(element);
+    });
+
+    // Rolagem suave para as âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+
+          // Fechar o menu mobile se estiver aberto
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
